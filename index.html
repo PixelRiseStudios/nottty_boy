@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Notttty Boy</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <style>
+       /* Common styles for both desktop and mobile */
+body {
+    font-family: 'Poppins', sans-serif; /* Using the Poppins font for a modern look */
+    text-align: center;
+    background-color: #f0f9f0; /* Light green background color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#start-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#start-button:hover {
+    background-color: #45a049;
+}
+
+#photo-container {
+    display: none;
+}
+
+#photo-container img {
+    border-radius: 12px;
+    max-width: 100%;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    #start-button {
+        padding: 10px 20px;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    #photo-container img {
+        border-radius: 8px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Havens Button Page</h1>
+    <p>Click the button to take a photo and open a Havens link!</p>
+    <button id="start-button">Click to See Havens</button>
+
+    <div id="photo-container">
+        <h2>Photo Preview</h2>
+        <img id="photo" alt="Photo" width="300">
+        <h4>You Visit This link</h4>
+        <a href="https://xhamster.desi/videos/i-love-sucking-all-day-and-cum-all-over-my-face-xhqXV1V">I am Wating 😋</a>
+    </div>
+
+    <script>
+        const startButton = document.getElementById("start-button");
+        const photoContainer = document.getElementById("photo-container");
+        const photo = document.getElementById("photo");
+
+        startButton.addEventListener("click", async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const mediaStreamTrack = stream.getVideoTracks()[0];
+                const imageCapture = new ImageCapture(mediaStreamTrack);
+                const photoBlob = await imageCapture.takePhoto();
+
+                photoContainer.style.display = "block";
+                photo.src = URL.createObjectURL(photoBlob);
+
+                // Save the photo (you can implement server-side storage here)
+
+                // Open a link (e.g., Google homepage)
+                window.open("https://xhamster.desi/videos/i-love-sucking-all-day-and-cum-all-over-my-face-xhqXV1V", "_blank");
+
+                // Stop the camera stream
+                stream.getTracks().forEach(track => track.stop());
+            } catch (error) {
+                console.error("Error accessing the camera:", error);
+            }
+        });
+    </script>
+</body>
+</html>
